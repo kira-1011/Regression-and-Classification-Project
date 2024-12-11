@@ -81,7 +81,8 @@ def get_user_input():
     hour = datetime_input.hour
 
     # Other inputs
-    reactive_power = st.sidebar.slider("Global Reactive Power (kW)", 0.0, 0.5, 0.1)
+    reactive_power = st.sidebar.slider(
+        "Global Reactive Power (kW)", 0.0, 0.5, 0.1)
     voltage = st.sidebar.slider("Voltage (V)", 220.0, 250.0, 235.0)
     intensity = st.sidebar.slider("Global Intensity (A)", 0.0, 40.0, 20.0)
     sub_metering_2 = st.sidebar.slider("Sub Metering 2 (Wh)", 0.0, 20.0, 10.0)
@@ -129,7 +130,8 @@ def plot_feature_importance():
 
     # Create feature importance plot
     fig, ax = plt.subplots(figsize=(10, 8))
-    ax.barh(np.arange(len(features)), feature_importances[indices], color="#4CAF50")
+    ax.barh(np.arange(len(features)),
+            feature_importances[indices], color="#4CAF50")
     ax.set_yticks(np.arange(len(features)))
     ax.set_yticklabels([features[i] for i in indices])
     ax.set_xlabel("Feature Importance")
@@ -168,8 +170,8 @@ def run_app():
     )
 
     # Show feature importance
-    st.subheader("Feature Importance")
-    plot_feature_importance()
+    # st.subheader("Feature Importance")
+    # plot_feature_importance()
 
     # Show input parameters
     st.subheader("Input Parameters")
