@@ -41,30 +41,30 @@ def preprocess_input(data):
     numerical_features = [
         "Global_reactive_power",
         "Voltage",
-        "Global_intensity",
+        # "Global_intensity",
         "Sub_metering_2",
         "Sub_metering_3",
-        "hour",
+        # "hour",
     ]
     scaled_features = pd.DataFrame(
         scaler.transform(data[numerical_features]), columns=numerical_features
     )
 
     # Combine all features
-    final_features = pd.concat([scaled_features, data[["is_weekend"]]], axis=1)
-    final_features = final_features[
-        [
-            "Global_reactive_power",
-            "Voltage",
-            "Global_intensity",
-            "Sub_metering_2",
-            "Sub_metering_3",
-            "is_weekend",
-            "hour",
-        ]
-    ]
+    # final_features = pd.concat([scaled_features, data[["is_weekend"]]], axis=1)
+    # final_features = final_features[
+    #     [
+    #         "Global_reactive_power",
+    #         "Voltage",
+    #         "Global_intensity",
+    #         "Sub_metering_2",
+    #         "Sub_metering_3",
+    #         "is_weekend",
+    #         "hour",
+    #     ]
+    # ]
 
-    return final_features
+    return scaled_features
 
 
 def get_user_input():
@@ -76,15 +76,15 @@ def get_user_input():
     time = st.sidebar.time_input("Select Time", datetime.now())
 
     # Convert 'datetime' to datetime type and set as index
-    datetime_input = datetime.combine(date, time)
-    is_weekend = datetime_input.weekday() >= 5
-    hour = datetime_input.hour
+    # datetime_input = datetime.combine(date, time)
+    # is_weekend = datetime_input.weekday() >= 5
+    # hour = datetime_input.hour
 
     # Other inputs
     reactive_power = st.sidebar.slider(
         "Global Reactive Power (kW)", 0.0, 0.5, 0.1)
     voltage = st.sidebar.slider("Voltage (V)", 220.0, 250.0, 235.0)
-    intensity = st.sidebar.slider("Global Intensity (A)", 0.0, 40.0, 20.0)
+    # intensity = st.sidebar.slider("Global Intensity (A)", 0.0, 40.0, 20.0)
     sub_metering_2 = st.sidebar.slider("Sub Metering 2 (Wh)", 0.0, 20.0, 10.0)
     sub_metering_3 = st.sidebar.slider("Sub Metering 3 (Wh)", 0.0, 20.0, 10.0)
 
@@ -92,11 +92,11 @@ def get_user_input():
     data = {
         "Global_reactive_power": [reactive_power],
         "Voltage": [voltage],
-        "Global_intensity": [intensity],
+        # "Global_intensity": [intensity],
         "Sub_metering_2": [sub_metering_2],
         "Sub_metering_3": [sub_metering_3],
-        "hour": [hour],
-        "is_weekend": [is_weekend],
+        # "hour": [hour],
+        # "is_weekend": [is_weekend],
     }
 
     df = pd.DataFrame(data)
@@ -118,11 +118,11 @@ def plot_feature_importance():
     features = [
         "Global_reactive_power",
         "Voltage",
-        "Global_intensity",
+        # "Global_intensity",
         "Sub_metering_2",
         "Sub_metering_3",
-        "is_weekend",
-        "hour",
+        # "is_weekend",
+        # "hour",
     ]
 
     # Sort features by importance in descending order
